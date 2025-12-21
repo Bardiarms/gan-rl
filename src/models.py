@@ -47,7 +47,7 @@ class Generator(nn.Module):
         return self.net(z)
 
 
-class Discrimintor(nn.Module):
+class Discriminator(nn.Module):
     
     def __init__(self, img_channels = 3, base = 64):
         
