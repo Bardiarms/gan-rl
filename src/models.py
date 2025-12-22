@@ -49,6 +49,11 @@ class Generator(nn.Module):
 
 
 class Discriminator(nn.Module):
+    """
+
+    We use Spectral Normalization to normalize the weights, therefore preventing gradients from exploding.
+    
+    """
     
     def __init__(self, img_channels = 3, base = 64):
         
