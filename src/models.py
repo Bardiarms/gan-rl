@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+from torch.nn.utils import spectral_norm
 
 
 # Generator Class
@@ -54,31 +55,31 @@ class Discriminator(nn.Module):
         super().__init__()
         self.net = nn.Sequential(
             # 128 -> 64
-            nn.Conv2d(img_channels, base, 4, 2, 1, bias=False),
+            spectral_norm(nn.Conv2d(img_channels, base, 4, 2, 1, bias=False)),
             nn.LeakyReLU(0.2, inplace=True),
             
             # 64 -> 32
-            nn.Conv2d(base, base*2, 4, 2, 1, bias=False),
+            spectral_norm(nn.Conv2d(base, base*2, 4, 2, 1, bias=False)),
             nn.BatchNorm2d(base*2),
             nn.LeakyReLU(0.2, inplace=True),
             
             # 32 -> 16
-            nn.Conv2d(base*2, base*4, 4, 2, 1, bias=False),
+            spectral_norm(nn.Conv2d(base*2, base*4, 4, 2, 1, bias=False)),
             nn.BatchNorm2d(base*4),
             nn.LeakyReLU(0.2, inplace=True),
             
             # 16 -> 8
-            nn.Conv2d(base*4, base*8, 4, 2, 1, bias=False),
+            spectral_norm(nn.Conv2d(base*4, base*8, 4, 2, 1, bias=False)),
             nn.BatchNorm2d(base*8),
             nn.LeakyReLU(0.2, inplace=True),
             
             # 8 -> 4
-            nn.Conv2d(base*8, base*16, 4, 2, 1, bias=False),
+            spectral_norm(nn.Conv2d(base*8, base*16, 4, 2, 1, bias=False)),
             nn.BatchNorm2d(base*16),
             nn.LeakyReLU(0.2, inplace=True),
             
             # 4 -> 1 (logit)
-            nn.Conv2d(base*16, 1, 4, 1, 0, bias=False),
+            spectral_norm(nn.Conv2d(base*16, 1, 4, 1, 0, bias=False)),
         )
         
     
