@@ -9,3 +9,9 @@ artifacts_model/
 __pycache__/
 .ipynb_checkpoints/
 .DS_Store
+evaluate.py
+gan_train.py
+preprocess.py
+rl_train.py
+Generator.py
+Discriminator.py
